@@ -6,7 +6,6 @@
 
   ...description
 
-
 ## Installation
 ```
 $ npm install -g p8m
