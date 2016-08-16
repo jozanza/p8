@@ -1,0 +1,9 @@
+{
+  "version": "0.0.1",
+  "name": "mon4",
+  "main": "./index.moon",
+  "dependencies": {
+    "perf": "https://raw.githubusercontent.com/jozanza/p8-modules/master/perf.moon",
+    "table": "https://raw.githubusercontent.com/jozanza/p8-modules/master/table.moon"
+  }
+}

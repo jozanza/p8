@@ -1,0 +1,20 @@
+{
+  "name": "p8m",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/p8m.js",
+  "bin": {
+    "p8m": "src/p8m.js"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/ava"
+  },
+  "author": "Josiah Savary <hello@jsavary.com> (http://jsavary.com)",
+  "license": "ISC",
+  "devDependencies": {
+    "ava": "^0.16.0"
+  },
+  "dependencies": {
+    "commander": "^2.9.0"
+  }
+}
