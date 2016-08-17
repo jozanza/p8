@@ -17,6 +17,10 @@ const id = exports.id = x => x
 
 const val = exports.val = x => () => x
 
+const apply = exports.apply = curry(
+  (f, xs) => f(...xs)
+)
+
 const tap = exports.tap = curry(
   (f, x) => (f(x), x)
 )
@@ -39,6 +43,10 @@ const reduce = exports.reduce = curry(
 
 const filter = exports.filter = curry(
   (f, xs) => xs.filter(f)
+)
+
+const push = exports.push = curry(
+  (xs, x) => [...xs, x]
 )
 
 const modifyIndex = exports.modifyIndex = curry(
@@ -85,6 +93,10 @@ const prepend = exports.prepend = curry(
   (a, b) => `${a}${b}`
 )
 
+const append = exports.append = curry(
+  (a, b) => `${b}${a}`
+)
+
 const sandwich = exports.sandwich = curry(
   (a, b, c) => `${a}${c}${b}`
 )
@@ -128,6 +140,10 @@ end)(${x})`
 
 // side effects
 
+const writeSync = exports.writeSync = curry(
+  (k, v) => require('fs').writeFileSync(k, v)
+)
+
 const readSync = exports.readSync = (
   x => 'http' === x.substr(0, 4)
     ? require('child_process').execSync(`curl -# ${x}`)
@@ -148,7 +164,10 @@ const createModulesDir = exports.createModulesDir = (
 
 const installPicoModules = exports.installPicoModules = compose(
   map(compose(
-    tap(([k, v]) => require('fs').writeFileSync(`./pico_modules/${k}.lua`, v)),
+    tap(compose(
+      apply(writeSync),
+      modifyIndex(0, compose(sandwich('./pico_modules/', '.lua'), prop(0)))
+    )),
     modifyIndex(1, compose(
       ifelse(
         compose(truthy, prop(2)),
@@ -181,8 +200,18 @@ const compilePicoRequire = exports.compilePicoRequire = compose(
     sandwich('./pico_modules/', '.lua'),
     prop(0)
   ))),
-  toPairs,
-  prop('dependencies')
+  toPairs
+)
+
+const compilePicoInit = exports.compilePicoInit = compose(
+  prepend('_init = '),
+  intoLuaFunction,
+  toString,
+  ifelse(
+    isMoonScript,
+    compose(compileMoonScript, readSync),
+    readSync
+  )
 )
 
 exports.default = module.exports

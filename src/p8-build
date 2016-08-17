@@ -7,20 +7,39 @@ const program = require('commander')
   .option('-p, --print', 'prints built code to stdout')
   .parse(process.argv)
 
-const { print } = program
-
+const { print, args } = program
 const p8json = require(`${process.cwd()}/p8.json`)
 const {
   compilePicoRequire,
-  readSync
+  compilePicoInit,
+  writeSync
 } = require('./utils')
-const requires = compilePicoRequire(p8json)
-const main = readSync(p8json.main)
+const start = '\n__lua__\n'
+const end = '\n__gfx__\n'
+const next = start + [
+  compilePicoRequire(p8json.dependencies),
+  compilePicoInit(p8json.main)
+].join('\n') + end
+const filename = `${args[0] || p8json.name}.p8`
+let cart
 
-const output = requires
+try {
+  cart = require('fs').readFileSync(filename, 'utf8')
+} catch(err) {
+  cart = require('./empty-cart')
+}
+
+const prev = cart.substring(
+  cart.indexOf(start),
+  cart.lastIndexOf(end) + end.length
+)
+
+// console.log(prev)
+
+const output = cart.replace(prev, next)
 
 if (print) {
   console.log(output)
 } else {
-  // ...
+  writeSync(filename, output)
 }
