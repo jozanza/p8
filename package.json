@@ -2,9 +2,9 @@
   "name": "p8m",
   "version": "0.0.1",
   "description": "",
-  "main": "src/p8m.js",
+  "main": "dist/p8.js",
   "bin": {
-    "p8m": "src/p8m.js"
+    "p8": "src/p8.js"
   },
   "scripts": {
     "test": "./node_modules/.bin/ava"

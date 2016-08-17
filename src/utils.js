@@ -9,12 +9,20 @@ const compose = exports.compose = (...fs) => (...args) => !fs.length
   ? args[0]
   : compose(...fs.slice(0, fs.length - 1))(fs[fs.length - 1](...args))
 
+const ifelse = exports.ifelse = curry(
+  (f, a, b, x) => f(x) ? a(x) : b(x)
+)
+
+const id = exports.id = x => x
+
+const val = exports.val = x => () => x
+
 const tap = exports.tap = curry(
   (f, x) => (f(x), x)
 )
 
-const date = exports.date = () => (
-  (new Date()).toLocaleString()
+const date = exports.date = (
+  () => (new Date()).toLocaleString()
 )
 
 const prop = exports.prop = curry(
@@ -33,6 +41,14 @@ const filter = exports.filter = curry(
   (f, xs) => xs.filter(f)
 )
 
+const modifyIndex = exports.modifyIndex = curry(
+  (i, f, xs) => {
+    let v = xs.slice()
+    v[i] = f(v)
+    return v
+  }
+)
+
 const toPairs = exports.toPairs = (
   o => Object.keys(o).map(k => [k, o[k]])
 )
@@ -43,6 +59,10 @@ const truthy = exports.truthy = (
 
 const falsey = exports.falsey = (
   x => !x
+)
+
+const toString = exports.toString = (
+  x => '' + x
 )
 
 const trim = exports.trim = (
@@ -114,6 +134,10 @@ const readSync = exports.readSync = (
     : require('fs').readFileSync(x)
 )
 
+const isMoonScript = exports.isMoonScript = (
+  x => require('path').extname(x) === '.moon'
+)
+
 const compileMoonScript = exports.compileMoonScript = (
   x => require('child_process').execSync(`echo "${x}" | moonc --`)
 )
@@ -124,16 +148,23 @@ const createModulesDir = exports.createModulesDir = (
 
 const installPicoModules = exports.installPicoModules = compose(
   map(compose(
-    tap(([k, v]) => console.log(`...finished installing ${k}!\n`)),
     tap(([k, v]) => require('fs').writeFileSync(`./pico_modules/${k}.lua`, v)),
-    ([k, v]) => {
-      let x = readSync(v)
-      x = require('path').extname(v) === '.moon'
-        ? compileMoonScript(x)
-        : x
-      return [k, x]
-    },
-    tap(([k, v]) => console.log(`\nLoading ${k}...(${v})`))
+    modifyIndex(1, compose(
+      ifelse(
+        compose(truthy, prop(2)),
+        compose(compileMoonScript, prop(1)),
+        prop(1)
+      )
+    )),
+    modifyIndex(1, compose(
+      readSync,
+      prop(1)
+    )),
+    modifyIndex(2, compose(
+      isMoonScript,
+      prop(1)
+    )),
+    tap(([k, v]) => console.log(`Installing ${k}`))
   )),
   toPairs,
   prop('dependencies'),
@@ -143,13 +174,15 @@ const installPicoModules = exports.installPicoModules = compose(
 const compilePicoRequire = exports.compilePicoRequire = compose(
   intoRequreFunction,
   intoLuaTable,
-  map(([k, v]) => [k, intoLuaFunction(
-    ''+readSync(`./pico_modules/${k}.lua`)
-  )]),
+  map(modifyIndex(1, compose(
+    intoLuaFunction,
+    toString,
+    readSync,
+    sandwich('./pico_modules/', '.lua'),
+    prop(0)
+  ))),
   toPairs,
   prop('dependencies')
 )
-
-
 
 exports.default = module.exports

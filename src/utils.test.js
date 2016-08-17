@@ -28,6 +28,29 @@ test('compose', t => {
   )
 })
 
+test('id', t => {
+  const { id } = utils
+  const f = id
+  ;[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].forEach(n => {
+    t.is(f(n), n)
+  })
+})
+
+test('val', t => {
+  const { val } = utils
+  ;[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].forEach(n => {
+    const f = val(n)
+    t.is(f(), n)
+  })
+})
+
+test('ifelse', t => {
+  const { ifelse, truthy, val } = utils
+  const f = ifelse(truthy, val(1), val(2))
+  t.is(f(true), 1)
+  t.is(f(false), 2)
+})
+
 test('tap', t => {
   const { tap } = utils
   const f = tap(() => 42)
@@ -74,6 +97,13 @@ test('filter', t => {
     f([0, 1, 2, 3, false, NaN, null]),
     [1, 2, 3]
   )
+})
+
+test('modifyIndex', t => {
+  const { modifyIndex, val } = utils
+  const f = modifyIndex(0, val('foo'))
+  const x = [0, 1, 2, 3, false, NaN, null]
+  t.is(f(x)[0], 'foo')
 })
 
 test('toPairs', t => {
