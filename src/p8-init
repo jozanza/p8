@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+
+const program = require('commander')
+  .command('p8')
+  .usage('init')
+  .description('prompt user for info and create a p8.json file')
+  .parse(process.argv)
+
+console.log('INIT!')

@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+
+const program = require('commander')
+  .command('p8')
+  .usage('install')
+  .description('install dependencies listed in p8.json to ./pico_modules')
+  .parse(process.argv)
+
+const p8json = require(`${process.cwd()}/p8.json`)
+const { installPicoModules } = require('./utils')
+installPicoModules(p8json)

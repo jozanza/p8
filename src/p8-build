@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+
+const program = require('commander')
+  .command('p8')
+  .usage('build [options] [name]')
+  .description('outputs .p8 file with specified name (defaults to name prop in p8.json)')
+  .option('-p, --print', 'prints built code to stdout')
+  .parse(process.argv)
+
+const { print } = program
+
+const p8json = require(`${process.cwd()}/p8.json`)
+const {
+  compilePicoRequire,
+  readSync
+} = require('./utils')
+const requires = compilePicoRequire(p8json)
+const main = readSync(p8json.main)
+
+const output = requires
+
+if (print) {
+  console.log(output)
+} else {
+  // ...
+}

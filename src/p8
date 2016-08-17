@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+
+const pjson = require('../package')
+const program = require('commander')
+  .version(pjson.version)
+  .usage('<cmd> [options]')
+  .command('init', 'initialize project')
+  .command('install', 'install dependencies')
+  .command('build [name]', 'build .p8')
+  .parse(process.argv)
