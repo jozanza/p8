@@ -34,8 +34,6 @@ const prev = cart.substring(
   cart.lastIndexOf(end) + end.length
 )
 
-// console.log(prev)
-
 const output = cart.replace(prev, next)
 
 if (print) {
