@@ -1,4 +1,4 @@
-# p8m
+# p8
 
 [![Build Status](https://api.travis-ci.org/jozanza/p8m.svg?branch=master)](http://travis-ci.org/jozanza/p8m)
 [![NPM Version](http://img.shields.io/npm/v/p8m.svg?style=flat)](https://www.npmjs.org/package/p8m)
