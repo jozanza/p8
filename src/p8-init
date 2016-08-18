@@ -7,7 +7,7 @@ const program = require('commander')
   .parse(process.argv)
 
 const { parse } = require('path')
-const { curry } = require('./utils')
+const { curry, writeSync } = require('./utils')
 
 const cwd = process.cwd()
 
@@ -62,7 +62,7 @@ rl.on('line', () => Promise.resolve({})
       if (!yes) {
         console.log('cancelled')
       } else {
-        require('fs').writeFileSync(filename, p8json)
+        writeSync(filename, p8json)
         console.log('saved!')
       }
       done()

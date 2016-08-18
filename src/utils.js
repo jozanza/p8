@@ -126,8 +126,8 @@ const intoLuaTable = exports.intoLuaTable = compose(
   map(intoLuaTableProp)
 )
 
-const intoRequreFunction = exports.intoRequireFunction = (x = '') => (
-`(function(requires)
+const intoRequireFunction = exports.intoRequireFunction = (x = '') => (
+`require = (function(requires)
   modules = {}
   return function(name)
     if not modules[name] then
@@ -191,7 +191,7 @@ const installPicoModules = exports.installPicoModules = compose(
 )
 
 const compilePicoRequire = exports.compilePicoRequire = compose(
-  intoRequreFunction,
+  intoRequireFunction,
   intoLuaTable,
   map(modifyIndex(1, compose(
     intoLuaFunction,

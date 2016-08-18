@@ -279,7 +279,7 @@ test('intoRequireFunction', t => {
   ['qux'] = {"a", "b", "c", 1, 2, 3, function() end};
 }`
   const b =
-`(function(requires)
+`require = (function(requires)
   modules = {}
   return function(name)
     if not modules[name] then
