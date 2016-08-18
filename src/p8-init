@@ -6,4 +6,68 @@ const program = require('commander')
   .description('prompt user for info and create a p8.json file')
   .parse(process.argv)
 
-console.log('INIT!')
+const { parse } = require('path')
+const { curry } = require('./utils')
+
+const cwd = process.cwd()
+
+const rl = require('readline').createInterface({
+  input: process.stdin,
+  output: process.stdout
+})
+
+const ask = curry((a, f, xs) => new Promise(cb =>
+  rl.question(a, x => cb(
+    Promise.resolve(f(xs, x))
+  ))
+))
+
+const assignWithDefault = curry(
+  (k, v, o, x) => Object.assign({}, o, { [k]: x || v })
+)
+
+console.log(
+`This utility will help you quickly create a p8.json file.
+p8.json tracks the basic info and dependencies of your project.
+
+Press ^C at any time to quit.`
+)
+
+rl.on('line', () => Promise.resolve({})
+  .then(ask(
+    `name: (${parse(cwd).name}) `,
+    assignWithDefault('name', parse(cwd).name)
+  ))
+  .then(ask(
+    'version: (0.0.1) ',
+    assignWithDefault('version', '0.0.1')
+  ))
+  .then(ask(
+    `entry point: (${`${cwd}/index.lua`}) `,
+    assignWithDefault('main', `${cwd}/index.lua`)
+  ))
+  .then(ask(
+    'description: ',
+    assignWithDefault('description', '')
+  ))
+  .then(answers => new Promise(done => {
+    const filename = `${cwd}/p8.json`
+    const p8json = JSON.stringify(answers, null, 2)
+    console.log([
+      `\nAbout to write to ${filename}:`,
+      `${p8json}`,
+    ].join('\n\n'))
+    rl.question('Is this ok? (yes) ', x => {
+      const yes = (x == '' || x === 'yes' || x =='Y')
+      if (!yes) {
+        console.log('cancelled')
+      } else {
+        require('fs').writeFileSync(filename, p8json)
+        console.log('saved!')
+      }
+      done()
+    })
+  }))
+  .then(process.exit)
+  .catch(err => (console.log(err), process.exit(1)))
+)
