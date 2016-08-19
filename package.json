@@ -2,9 +2,9 @@
   "name": "p8",
   "version": "0.0.1",
   "description": "",
-  "main": "src/p8.js",
+  "main": "src/p8",
   "bin": {
-    "p8": "src/p8.js"
+    "p8": "src/p8"
   },
   "scripts": {
     "test": "./node_modules/.bin/ava"
