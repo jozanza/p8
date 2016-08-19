@@ -21,7 +21,7 @@ I got tired of copy-pasting code from carts and using PICO-8's built-in IDE pret
 
 ## Installation
 
-##### `npm install -g p8`
+#### `npm install -g p8`
 
 > **NOTE:** I haven't done any cross-platform testing yet, so make sure you are on OSX and are running node.js v6.
 > Additionally, if you want support for moonscript, be sure to install [moonc](http://moonscript.org/#installation)
