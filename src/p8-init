@@ -3,7 +3,7 @@
 const program = require('commander')
   .command('p8')
   .usage('init')
-  .description('prompt user for info and create a p8.json file')
+  .description('interactively create a p8.json file')
   .parse(process.argv)
 
 const { parse } = require('path')
@@ -48,8 +48,8 @@ rl.on('line', () => Promise.resolve({})
     assignWithDefault('author', username)
   ))
   .then(ask(
-    `entry point: (${`${cwd}/index.lua`}) `,
-    assignWithDefault('main', `${cwd}/index.lua`)
+    `entry point: (./index.lua) `,
+    assignWithDefault('main', `./index.lua`)
   ))
   .then(ask(
     'description: ',
