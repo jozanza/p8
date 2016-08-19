@@ -32,22 +32,22 @@ I got tired of copy-pasting code from carts and using PICO-8's built-in IDE pret
 
 To start out, create your project directory. Then from inside of your project directory, follow these instructions:
 
-#### 1. Create a p8.json
+### 1. Create a p8.json
 
 This is the main file required for managing your project and its dependencies. Running `p8 init` will help you interactively create this file.
 > :bulb: run ```p8 init --help``` for more info
 
-#### 2. Add your dependencies
+### 2. Add your dependencies
 
 The path to local or remote `.lua` or `.moon` modules goes in the `dependencies` section of your **p8.json**. You can do this easily by running `p8 add <path/to/my/dependency>`. Add as many or as few dependencies as you want (just be careful not to exceed the cartridge size and token limits). I've started posting some of my own [here](https://github.com/jozanza/pico_modules).
 > :bulb: run ```p8 add --help``` for more info
 
-#### 3. Install your dependencies
+### 3. Install your dependencies
 
 The actual code for your dependencies lives inside a **pico_modules** dir in the top level of your project. `p8 install` will automatically create this folder and save your dependencies inside it.
 > :bulb: run ```p8 install --help``` for more info
 
-#### 4. Run your cart!
+### 4. Run your cart!
 
 First, add some code to your entry point (the file listed as `main` in your **p8.json**).
 Next run `p8 start -w` to run your cartridge in watch mode to automatically reload as you edit your entry point.
