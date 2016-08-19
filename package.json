@@ -1,7 +1,7 @@
 {
   "name": "p8",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.0.3",
+  "description": "👾 PICO-8 dependency manager",
   "main": "src/p8",
   "bin": {
     "p8": "src/p8"
@@ -11,10 +11,20 @@
   },
   "author": "Josiah Savary <hello@jsavary.com> (http://jsavary.com)",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jozanza/p8.git"
+  },
   "devDependencies": {
     "ava": "0.16.0"
   },
   "dependencies": {
     "commander": "2.9.0"
-  }
+  },
+  "keywords": [
+    "pico8",
+    "pico-8",
+    "moonscript",
+    "carts"
+  ]
 }
