@@ -28,7 +28,7 @@ I got tired of copy-pasting code from carts and using PICO-8's built-in IDE pret
 
 ## Getting Started
 
-It's just a few steps to get going. And it should only take a couple minutes :beers:.
+> **NOTE:** It's just a few steps to get going. And it should only take a couple minutes :beers:. Also, feel free to check out the [example p8 project](https://github.com/jozanza/p8_example) now or later.
 
 To start out, create your project directory. Then from inside of your project directory, follow these instructions:
 
