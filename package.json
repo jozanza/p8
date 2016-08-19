@@ -1,8 +1,8 @@
 {
-  "name": "p8m",
+  "name": "p8",
   "version": "0.0.1",
   "description": "",
-  "main": "dist/p8.js",
+  "main": "src/p8.js",
   "bin": {
     "p8": "src/p8.js"
   },
@@ -12,9 +12,9 @@
   "author": "Josiah Savary <hello@jsavary.com> (http://jsavary.com)",
   "license": "ISC",
   "devDependencies": {
-    "ava": "^0.16.0"
+    "ava": "0.16.0"
   },
   "dependencies": {
-    "commander": "^2.9.0"
+    "commander": "2.9.0"
   }
 }
