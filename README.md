@@ -39,7 +39,7 @@ This is the main file required for managing your project and its dependencies. R
 
 #### 2. Add your dependencies
 
-The path to local or remote `.lua` or `.moon` modules goes in the `dependencies` section of your **p8.json**. You can do this easily by running `p8 add <path/to/my/dependency>`. Add as many or as few dependencies as you want (just be careful not to exceed the cartridge size and token limits).
+The path to local or remote `.lua` or `.moon` modules goes in the `dependencies` section of your **p8.json**. You can do this easily by running `p8 add <path/to/my/dependency>`. Add as many or as few dependencies as you want (just be careful not to exceed the cartridge size and token limits). I've started posting some of my own [here](https://github.com/jozanza/pico_modules).
 > :bulb: run ```p8 add --help``` for more info
 
 #### 3. Install your dependencies
