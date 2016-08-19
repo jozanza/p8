@@ -7,9 +7,10 @@ const program = require('commander')
   .parse(process.argv)
 
 const { parse } = require('path')
+const { execSync } = require('child_process')
 const { curry, writeSync } = require('./utils')
-
 const cwd = process.cwd()
+const username = `${execSync('whoami')}`.trim()
 
 const rl = require('readline').createInterface({
   input: process.stdin,
@@ -41,6 +42,10 @@ rl.on('line', () => Promise.resolve({})
   .then(ask(
     'version: (0.0.1) ',
     assignWithDefault('version', '0.0.1')
+  ))
+  .then(ask(
+    `author: (${username}) `,
+    assignWithDefault('author', username)
   ))
   .then(ask(
     `entry point: (${`${cwd}/index.lua`}) `,

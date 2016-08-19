@@ -12,14 +12,17 @@ const p8json = require(`${process.cwd()}/p8.json`)
 const {
   compilePicoRequire,
   compilePicoInit,
-  writeSync
+  writeSync,
+  lowercase
 } = require('./utils')
 const start = '\n__lua__\n'
 const end = '\n__gfx__\n'
 const next = start + [
-  compilePicoRequire(p8json.dependencies),
+  `-- ${lowercase(p8json.name)} ${lowercase(p8json.version)}`,
+  `-- by ${lowercase(p8json.author)}`,
+  (p8json.dependencies ? compilePicoRequire(p8json.dependencies) : null),
   compilePicoInit(p8json.main)
-].join('\n') + end
+].filter(x => x).join('\n') + end
 const filename = `${args[0] || p8json.name}.p8`
 let cart
 

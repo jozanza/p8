@@ -2,7 +2,7 @@
 
 const program = require('commander')
   .command('p8')
-  .usage('start [options] [name]')
+  .usage('start [options] [name] [switches...]')
   .description('starts cartridge')
   .option('-w, --watch', 'reload cartridge whenever entry point is updated')
   .parse(process.argv)
@@ -49,9 +49,7 @@ end tell`
           rl.write(idleMessage)
         }, 500)
       } catch(err) {
-        // clearLine()
         rl.write(err.message[0])
-        // console.log(err.message)
       }
     }
     ++i
