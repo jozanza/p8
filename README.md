@@ -12,7 +12,7 @@
 
 I got tired of copy-pasting code from carts and using PICO-8's built-in IDE pretty quickly. This tool lets you reuse local and remote lua/moonscript modules and streamlines the process of reloading your cartridges as you develop.
 
-**tl;dr**:
+### Features:
 
 - Share code for carts via github (or any file host)
 - Use `require()` to use modules in your own carts
@@ -27,6 +27,8 @@ I got tired of copy-pasting code from carts and using PICO-8's built-in IDE pret
 > Additionally, if you want support for moonscript, be sure to install [moonc](http://moonscript.org/#installation)
 
 ## Getting Started
+
+It's just a few steps to get going. And it should only take a couple minutes :beers:.
 
 To start out, create your project directory. Then from inside of your project directory, follow these instructions:
 
@@ -51,7 +53,11 @@ First, add some code to your entry point (the file listed as `main` in your **p8
 Next run `p8 start -w` to run your cartridge in watch mode to automatically reload as you edit your entry point.
 > :bulb: run ```p8 start --help``` for more info
 
+Congrats -- now you can use and share modules effectively in PICO-8! Go tell you friends :ok_hand:
+
 ## Usage
+
+I've covered all the basics. Dig into the command line for more tips on usage.
 
 ```
   Usage: p8 <cmd> [options]
