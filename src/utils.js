@@ -155,7 +155,7 @@ const isMoonScript = exports.isMoonScript = (
 )
 
 const compileMoonScript = exports.compileMoonScript = (
-  x => require('child_process').execSync(`echo "${x}" | moonc --`)
+  input => require('child_process').execSync(`moonc --`, { input })
 )
 
 const createModulesDir = exports.createModulesDir = (
