@@ -7,8 +7,10 @@ const program = require('commander')
   .option('-w, --watch', 'reload cartridge whenever entry point is updated')
   .parse(process.argv)
 
+const readline = require('readline')
+const rl = require('readline').createInterface({ input: process.stdin, output: process.stdout })
 const { watch, args } = program
-const { exec, execSync } = require('child_process')
+const { exec, execSync, spawn } = require('child_process')
 const p8json = require(`${process.cwd()}/p8.json`)
 const name = args[0] || p8json.name
 const filename = `${name}.p8`
@@ -16,12 +18,10 @@ const filename = `${name}.p8`
 execSync(`${__dirname}/p8-build ${name}`)
 
 if (watch) {
-  const readline = require('readline')
-  const rl = require('readline').createInterface({ input: process.stdin, output: process.stdout })
   const clearLine = () => rl.write(null, { ctrl: true, name: 'u' })
   const runApplescript = (...scripts) => execSync(`osascript ${scripts.map(x => `-e '${x}'`).join(' ')}`)
   const activate = 'tell application "PICO-8" to activate'
-  const loadCart = 
+  const loadCart =
 `tell application "System Events"
 key code 53
 "load ${filename}"
@@ -44,10 +44,8 @@ end tell`
         rl.write('...reloading')
         runApplescript(activate, 'delay .3', loadCart)
         rl.write('...done!')
-        setTimeout(() => {
-          clearLine()
-          rl.write(idleMessage)
-        }, 500)
+        clearLine()
+        rl.write(idleMessage)
       } catch(err) {
         rl.write(err.message[0])
       }
@@ -56,4 +54,8 @@ end tell`
   })
 }
 
-exec(`/Applications/PICO-8.app/Contents/MacOS/pico8 -run ${filename}`)
+const pico8 = spawn(`/Applications/PICO-8.app/Contents/MacOS/pico8`, ['-run', filename])
+
+pico8.stdout.on('data', x => rl.write(x))
+pico8.stderr.on('data', x => rl.write(x))
+
