@@ -6,6 +6,15 @@ const program = require('commander')
   .description('install dependencies listed in p8.json to ./pico_modules')
   .parse(process.argv)
 
-const p8json = require(`${process.cwd()}/p8.json`)
-const { installPicoModules } = require('./utils')
-installPicoModules(p8json)
+const {
+  dependencies = {},
+  gfxDependencies = {}
+} = require(`${process.cwd()}/p8.json`)
+const {
+  createModulesDir,
+  installDependencies,
+  installGfxDependencies
+} = require('./utils')
+createModulesDir()
+installDependencies(dependencies)
+installGfxDependencies(gfxDependencies)

@@ -162,7 +162,7 @@ const createModulesDir = exports.createModulesDir = (
   () => require('child_process').execSync(`mkdir -p pico_modules`)
 )
 
-const installPicoModules = exports.installPicoModules = compose(
+const installDependencies = exports.installDependencies = compose(
   map(compose(
     tap(compose(
       apply(writeSync),
@@ -183,11 +183,19 @@ const installPicoModules = exports.installPicoModules = compose(
       isMoonScript,
       prop(1)
     )),
-    tap(([k, v]) => console.log(`Installing ${k}`))
+    tap(([k, v]) => console.log(`Installing lua module - ${k}`))
   )),
-  toPairs,
-  prop('dependencies'),
-  tap(createModulesDir)
+  toPairs
+)
+
+const installGfxDependencies = exports.installGfxDependencies = compose(
+  map(([k, v]) => {
+    console.log(`Installing sprite - ${k}`)
+    const buf = readSync(k)
+    const { base } = require('path').parse(k)
+    writeSync(`./pico_modules/${base}`, buf)
+  }),
+  toPairs
 )
 
 const compilePicoRequire = exports.compilePicoRequire = compose(

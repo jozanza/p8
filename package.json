@@ -19,7 +19,8 @@
     "ava": "0.16.0"
   },
   "dependencies": {
-    "commander": "2.9.0"
+    "commander": "2.9.0",
+    "get-pixels": "3.3.0"
   },
   "keywords": [
     "pico8",
