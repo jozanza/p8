@@ -26,9 +26,14 @@ I got tired of copy-pasting code from carts and using PICO-8's built-in IDE pret
 > **NOTE:** I haven't done any cross-platform testing yet, so make sure you are on OSX and are running node.js v6.
 > Additionally, if you want support for moonscript, be sure to install [moonc](http://moonscript.org/#installation)
 
-## Getting Started
+## Setup
 
-It's just a few steps to get going. And it should only take a couple minutes :beers:. Also, feel free to check out the **[example p8 project](https://github.com/jozanza/p8_example)** now or later. You also might want to get familiar with the fields used in **[p8.json](https://github.com/jozanza/p8/blob/master/p8.json.md)**.
+It's just a few steps to get up and running. Altogether, it should only take a couple minutes :beers:.
+
+**[Getting Started &raquo;](https://github.com/jozanza/p8/blob/master/getting-started.md)**
+
+You might also want to check out the **[example p8 project](https://github.com/jozanza/p8_example)** and get familiar with the fields used in **[p8.json](https://github.com/jozanza/p8/blob/master/p8.json.md)**.
+
 
 ## Usage
 
