@@ -14,10 +14,10 @@ I got tired of copy-pasting code from carts and using PICO-8's built-in IDE pret
 
 ### Features:
 
-- Share code for carts via github (or any file host)
-- Use `require()` to use modules in your own carts
-- Keep coding in your favorite IDE
-- Auto-reload carts while coding
+- Share *code* and *sprites* (via github or any file host)
+- Use *`require()`* to use modules in your own carts
+- Code in *any IDE you want*
+- *Auto-reload* carts while coding
 
 ## Installation
 

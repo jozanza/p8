@@ -3,8 +3,8 @@
 const program = require('commander')
   .command('p8')
   .usage('add [modules...]')
-  .description('add modules as "dependencies" listed in p8.json')
-  .option('-s --gfx', 'add as gfxDependency (sprite)', false)
+  .description('add modules as "dependencies" or "gfxDependencies" in p8.json.')
+  .option('-s --gfx', 'add as sprite (gfxDependencies)', false)
   .parse(process.argv)
 
 const { args, gfx } = program
