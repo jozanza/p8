@@ -1,6 +1,6 @@
 {
   "name": "p8",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "👾 PICO-8 dependency manager",
   "main": "src/p8",
   "bin": {
