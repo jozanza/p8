@@ -28,33 +28,24 @@ I got tired of copy-pasting code from carts and using PICO-8's built-in IDE pret
 
 ## Setup
 
-It's just a few steps to get up and running. Altogether, it should only take a couple minutes :beers:.
+It's just a few steps to get up and running. Altogether, it should only take a couple minutes :beers:. If you want a detailed walkthrough...
 
-### [Read Getting Started with p8 &raquo;](https://github.com/jozanza/p8/blob/master/getting-started.md)
+### • [Read Getting Started with p8 &raquo;](https://github.com/jozanza/p8/blob/master/getting-started.md)
 
+If you just want to jump straight in, here's the gist of what you need to do:
 
-You might also want to check out the **[example p8 project](https://github.com/jozanza/p8_example)** and get familiar with the fields used in **[p8.json](https://github.com/jozanza/p8/blob/master/p8.json.md)**.
-
-
-## Usage
-
+```bash
+p8 init                                               # creates and adds basic fields to p8.json
+p8 add https://some/website/module-i-want-to-require  # add lua or moonscript dependencies
+p8 add https://some/website/my-spritesheet.png        # add sprites (gfxDependencies)
+p8 install                                            # creates a pico_modules folder and stores dependencies there
+p8 start --watch                                      # builds + runs your cart. reloads whenever the entry-point is saved
 ```
-  Usage: p8 <cmd> [options]
 
-  Commands:
+> **NOTE:**  Run `p8 help` for more detailed information on usage for these commands.
 
-    init              initialize project
-    add [modules...]  add dependencies
-    install           install dependencies
-    build [name]      build a cartridge
-    start [options]   run the built cartridge (OSX-only)
-    help [cmd]        display help for [cmd]
+You might also want to check out the **[example p8 project](https://github.com/jozanza/p8_example)** and get familiar with the fields used in **[p8.json](https://github.com/jozanza/p8/blob/master/p8.json.md)**. File an issue or reach out if you run into any difficulties.
 
-  Options:
-
-    -h, --help     output usage information
-    -V, --version  output the version number
-```
 ## Credits
 
 `p8` is **heavily** inspired by [npm](https://npmjs.com/) and, to a lesser extent, [webpack](https://webpack.github.io/)
