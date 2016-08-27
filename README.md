@@ -14,10 +14,10 @@ I got tired of copy-pasting code from carts and using PICO-8's built-in IDE pret
 
 ### Features:
 
-- Share *code* and *sprites* (via github or any file host)
-- Use *`require()`* to use modules in your own carts
-- Code in *any IDE you want*
-- *Auto-reload* carts while coding
+- Share **code** and **sprites** (via github or any file host)
+- Use **`require()`** to use modules in your own carts
+- Code in **any IDE** you want
+- **Auto-reload** carts on save
 
 ## Installation
 
@@ -28,7 +28,7 @@ I got tired of copy-pasting code from carts and using PICO-8's built-in IDE pret
 
 ## Getting Started
 
-> **NOTE:** It's just a few steps to get going. And it should only take a couple minutes :beers:. Also, feel free to check out the [example p8 project](https://github.com/jozanza/p8_example) now or later.
+> **NOTE:** It's just a few steps to get going. And it should only take a couple minutes :beers:. Also, feel free to check out the **[example p8 project](https://github.com/jozanza/p8_example)** now or later.
 
 To start out, create your project directory. Then from inside of your project directory, follow these instructions:
 
@@ -39,7 +39,9 @@ This is the main file required for managing your project and its dependencies. R
 
 ### 2. Add your dependencies
 
-The path to local or remote `.lua` or `.moon` modules goes in the `dependencies` section of your **p8.json**. You can do this easily by running `p8 add <path/to/my/dependency>`. Add as many or as few dependencies as you want (just be careful not to exceed the cartridge size and token limits). I've started posting some of my own [here](https://github.com/jozanza/pico_modules).
+The path to local or remote `.lua` or `.moon` modules goes in the `dependencies` section of your **p8.json**. The path to local or remote `.png`, `.jpg`, or `.gif` sprites goes in the `gfxDependencies` section of your **p8.json**.
+
+Adding either kind of dependency can be done easily by running `p8 add <path/to/my/dependency>`. Add as many or as few dependencies as you want (just be careful not to exceed the cartridge size and token limits). If you need some modules to test with, I've started posting some of my own in my [pico_modules repo](https://github.com/jozanza/pico_modules). Be sure to add raw urls.
 > :bulb: run ```p8 add --help``` for more info
 
 ### 3. Install your dependencies
