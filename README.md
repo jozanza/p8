@@ -30,7 +30,8 @@ I got tired of copy-pasting code from carts and using PICO-8's built-in IDE pret
 
 It's just a few steps to get up and running. Altogether, it should only take a couple minutes :beers:.
 
-**[Getting Started &raquo;](https://github.com/jozanza/p8/blob/master/getting-started.md)**
+### [Read Getting Started with p8 &raquo;](https://github.com/jozanza/p8/blob/master/getting-started.md)
+
 
 You might also want to check out the **[example p8 project](https://github.com/jozanza/p8_example)** and get familiar with the fields used in **[p8.json](https://github.com/jozanza/p8/blob/master/p8.json.md)**.
 
