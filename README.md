@@ -11,6 +11,7 @@ Import lua/moonscript modules, spritesheets, and automatically reload your carts
 ## Installation
 
 ### [&laquo; Download the exectuables &raquo;](https://github.com/jozanza/p8/releases)
+
 <sup>- On macOS or linux, you may want to copy the executable into `/usr/bin`.</sup><br />
 <sup>- On windows, you may want to add the executable to your PATH.</sup>
 
@@ -26,18 +27,36 @@ npm i -g p8
 
 You can be up-and-running in 4 steps. Here's what that looks like on the command line:
 
-```bash
-# 1. Initialize
-p8 init                  # creates and adds basic fields to p8.json
+### 1. Initialize
 
-# 2. Add Dependencies
-p8 add <url or filepath> # add .lua, .moon, .png, .jpg, or .gif files
+Create and/or adds basic fields to p8.json.
 
-# 3. Install
-p8 install               # stores dependencies in a pico_modules folder
+```
+p8 init
+```
 
-# 4. Start
-p8 start --watch         # builds + runs your cart. reloads whenever the entry-point is saved
+### 2. Add Dependencies
+
+Add .lua, .moon, .png, .jpg, or .gif files.
+
+```
+p8 add [file|url...]
+```
+
+### 3. Install
+
+Stores dependencies in a pico_modules folder.
+
+```
+p8 install
+```
+
+### 4. Run
+
+Builds + runs your cart. Use the `--watch` flag to automatically reload whenever the entry-point is saved
+
+```
+p8 run
 ```
 
 > **NOTE:** Run `p8 help` for more detailed information on usage for these commands.
