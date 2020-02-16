@@ -9,8 +9,7 @@
     "lib": ["dom", "ESNext"],
     "outDir": "lib",
     "rootDir": "src",
-    "moduleResolution": "node",
-    "baseUrl": "src"
+    "moduleResolution": "node"
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]

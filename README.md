@@ -25,7 +25,7 @@ npm i -g p8
 
 ## Getting Started
 
-You can be up-and-running in 4 steps. Here's what that looks like on the command line:
+You can be up-and-running in 4 steps. Here's a summary:
 
 #### 1. Initialize
 

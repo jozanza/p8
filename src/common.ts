@@ -13,9 +13,7 @@ export interface ProjectConfig {
   dependencies?: {
     [name: string]: string
   }
-  gfxDependencies?: {
-    [name: string]: string
-  }
+  gfxDependencies?: string[]
   [key: string]: unknown
 }
 
