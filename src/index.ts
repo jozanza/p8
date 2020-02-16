@@ -5,7 +5,7 @@ enum Command {
   build = 'build',
   init = 'init',
   install = 'install',
-  start = 'start',
+  run = 'run',
 }
 
 export default function main() {
@@ -15,6 +15,7 @@ export default function main() {
     .version(require('../package').version)
     .usage('Usage: p8 <command> [options]')
     .commandDir('cmds')
+    .wrap(100)
     .help()
     .argv
   // prettier-ignore
@@ -29,6 +30,6 @@ export default function main() {
     case Command.build:
     case Command.init:
     case Command.install:
-    case Command.start: break
+    case Command.run: break
   }
 }

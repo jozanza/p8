@@ -5,12 +5,20 @@ import {
   getProjectDirname,
   whoami,
 } from '../common'
+import { CommandBuilder, Arguments } from 'yargs'
 
 export const command = 'init'
 
 export const describe = 'initialize the project'
 
-export async function handler() {
+export const builder: CommandBuilder = {}
+
+type Args = Arguments<{
+  $0: 'p8'
+  _: ['init'] & string[]
+}>
+
+export async function handler(_args: Args) {
   const defaults = await getProjectConfig()
   if (!defaults.name) {
     defaults.name = getProjectDirname()
