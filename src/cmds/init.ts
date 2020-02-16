@@ -55,7 +55,7 @@ export async function handler(_args: Args) {
     case 'y':
     case 'Y':
     case 'yes':
-      // TODO: write file
+      // TODO: write file & create entry point is it doens't exist
       console.log('Saved! 🎉')
       break
   }
