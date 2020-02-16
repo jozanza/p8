@@ -5,6 +5,7 @@ enum Command {
   build = 'build',
   init = 'init',
   install = 'install',
+  remove = 'remove',
   run = 'run',
 }
 
@@ -30,6 +31,7 @@ export default function main() {
     case Command.build:
     case Command.init:
     case Command.install:
+    case Command.remove:
     case Command.run: break
   }
 }

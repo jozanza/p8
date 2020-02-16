@@ -27,7 +27,7 @@ npm i -g p8
 
 You can be up-and-running in 4 steps. Here's what that looks like on the command line:
 
-### 1. Initialize
+#### 1. Initialize
 
 Create and/or adds basic fields to p8.json.
 
@@ -35,7 +35,7 @@ Create and/or adds basic fields to p8.json.
 p8 init
 ```
 
-### 2. Add Dependencies
+#### 2. Add Dependencies
 
 Add .lua, .moon, .png, .jpg, or .gif files.
 
@@ -43,7 +43,7 @@ Add .lua, .moon, .png, .jpg, or .gif files.
 p8 add [file|url...]
 ```
 
-### 3. Install
+#### 3. Install
 
 Stores dependencies in a pico_modules folder.
 
@@ -51,7 +51,7 @@ Stores dependencies in a pico_modules folder.
 p8 install
 ```
 
-### 4. Run
+#### 4. Run
 
 Builds + runs your cart. Use the `--watch` flag to automatically reload whenever the entry-point is saved
 
