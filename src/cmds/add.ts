@@ -8,6 +8,7 @@ export const describe =
 export const builder: CommandBuilder = {
   gfx: {
     alias: 's',
+    type: 'boolean',
     default: false,
     describe: 'add as sprite (gfxDependencies)',
   },

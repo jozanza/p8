@@ -1,3 +1,4 @@
+import { CommandBuilder, Arguments } from 'yargs'
 import readline from 'readline'
 import {
   CONFIG_PATH,
@@ -5,7 +6,6 @@ import {
   getProjectDirname,
   whoami,
 } from '../common'
-import { CommandBuilder, Arguments } from 'yargs'
 
 export const command = 'init'
 
