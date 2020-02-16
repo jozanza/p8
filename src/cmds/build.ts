@@ -2,8 +2,7 @@ import { CommandBuilder, Arguments } from 'yargs'
 
 export const command = 'build'
 
-export const describe =
-  'outputs .p8 file with specified name (defaults to name prop in p8.json)'
+export const describe = 'outputs a cart (.p8 file)'
 
 export const builder: CommandBuilder = {
   print: {
@@ -11,6 +10,11 @@ export const builder: CommandBuilder = {
     type: 'boolean',
     default: false,
     describe: 'prints built code to stdout',
+  },
+  out: {
+    alias: 'o',
+    type: 'string',
+    describe: 'the name of the cart to output (uses name field in p8.json by default)',
   },
 }
 

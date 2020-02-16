@@ -2,7 +2,7 @@ import { CommandBuilder, Arguments } from 'yargs'
 
 export const command = 'run'
 
-export const describe = 'runs a .p8 cartridge\nnneerrrrd!'
+export const describe = 'runs a .p8 cartridge'
 
 export const builder: CommandBuilder = {
   watch: {
@@ -13,7 +13,8 @@ export const builder: CommandBuilder = {
   },
   cart: {
     alias: 'c',
-    describe: 'the name of the cart to run (defaults to name field of p8.json)',
+    type: 'string',
+    describe: 'the name of the cart to run (uses name field in p8.json by default)',
   },
 }
 
