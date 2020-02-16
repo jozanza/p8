@@ -1,30 +1,48 @@
 {
   "name": "p8",
-  "version": "0.0.6",
+  "version": "1.0.0",
   "description": "👾 PICO-8 dependency manager",
-  "main": "src/p8",
+  "main": "lib/index.js",
   "bin": {
-    "p8": "src/p8"
+    "p8": "bin/p8"
+  },
+  "pkg": {
+    "scripts": "lib/**/*.js",
+    "assets": ["package.json"]
   },
   "scripts": {
-    "test": "./node_modules/.bin/ava"
+    "start": "tsc -w",
+    "prestart": "rm -rf lib",
+    "test": "pkg -o p8 package.json && ./p8",
+    "prepublish": "npm run build",
+    "build": "npm run build-linux && npm run build-macos && npm run build-win",
+    "prebuild": "tsc && rm -rf target && mkdir -p target/{linux,macos,win}",
+    "build-linux": "pkg -o target/linux/p8 -t linux package.json",
+    "build-macos": "pkg -o target/macos/p8 -t macos package.json",
+    "build-win": "pkg -o target/win/p8 -t win package.json"
+  },
+  "devDependencies": {
+    "@types/node": "^13.7.1",
+    "@types/yargs": "^15.0.3",
+    "pkg": "^4.4.3",
+    "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "yargs": "^15.1.0"
   },
   "author": "Josiah Savary <hello@jsavary.com> (http://jsavary.com)",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/jozanza/p8.git"
   },
-  "devDependencies": {
-    "ava": "0.16.0"
-  },
-  "dependencies": {
-    "commander": "2.9.0",
-    "get-pixels": "3.3.0"
+  "bugs": {
+    "url": "https://github.com/jozanza/p8/issues"
   },
   "keywords": [
     "pico8",
     "pico-8",
+    "lua",
     "moonscript",
     "carts"
   ]
