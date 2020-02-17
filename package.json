@@ -8,7 +8,9 @@
   },
   "pkg": {
     "scripts": "lib/**/*.js",
-    "assets": ["package.json"]
+    "assets": [
+      "package.json"
+    ]
   },
   "scripts": {
     "start": "tsc -w",
@@ -23,11 +25,13 @@
   },
   "devDependencies": {
     "@types/node": "^13.7.1",
+    "@types/node-fetch": "^2.5.4",
     "@types/yargs": "^15.0.3",
     "pkg": "^4.4.3",
     "typescript": "^3.7.5"
   },
   "dependencies": {
+    "node-fetch": "^2.6.0",
     "yargs": "^15.1.0"
   },
   "author": "Josiah Savary <hello@jsavary.com> (http://jsavary.com)",

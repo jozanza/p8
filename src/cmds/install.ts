@@ -1,4 +1,5 @@
 import { Arguments, CommandBuilder } from 'yargs'
+import { getProjectConfig, installDependency } from '../common'
 
 export const command = 'install'
 
@@ -13,5 +14,14 @@ type Args = Arguments<{
 }>
 
 export async function handler(args: Args) {
-  console.log(command, args)
+  const { dependencies = {}, gfxDependencies = {} } = await getProjectConfig()
+  for (const [name, src] of Object.entries(dependencies)) {
+    console.log('Installing', name, '...')
+    await installDependency(src)
+  }
+  for (const [name, src] of Object.entries(gfxDependencies)) {
+    console.log('Installing', name, '...')
+    await installDependency(src)
+  }
+  console.log('Done! ✨')
 }
