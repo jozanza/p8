@@ -1,0 +1,14 @@
+{
+  "name": "demo",
+  "main": "main.lua",
+  "version": "1.0.0",
+  "author": "jozanza",
+  "description": "",
+  "dependencies": {
+    "list": "https://raw.githubusercontent.com/jozanza/pico_modules/master/list.lua",
+    "perf": "https://raw.githubusercontent.com/jozanza/pico_modules/master/perf.moon"
+  },
+  "gfxDependencies": {
+    "foo.png": "https://github.com/jozanza/pico_modules/raw/master/foo.png"
+  }
+}
