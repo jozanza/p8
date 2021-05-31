@@ -2,6 +2,10 @@
 node_modules
 pico_modules
 p8.json
+lib
+target
 *.p8
 *.lua
 *.moon
+examples/*/*.p8
+examples/*/pico_modules

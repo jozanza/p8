@@ -1,5 +1,211 @@
-module.exports =
-`pico-8 cartridge // http://www.pico-8.com
+import fs from 'fs'
+import cp from 'child_process'
+import { promisify } from 'util'
+import { basename, parse, resolve } from 'path'
+import fetch from 'node-fetch'
+import getPixels_ from 'get-pixels'
+
+export interface ProjectConfig {
+  name: string
+  version?: string
+  author?: string
+  main: string
+  description?: string
+  dependencies?: {
+    [name: string]: string
+  }
+  gfxDependencies?: {
+    [name: string]: string
+  }
+  [key: string]: unknown
+}
+
+const MINIMAL_CONFIG: ProjectConfig = {
+  name: '',
+  main: '',
+}
+
+export const CONFIG_PATH = resolve('./p8.json')
+
+export const DEPS_PATH = resolve('./pico_modules')
+
+export const exists = fs.existsSync
+
+export const mkdir = promisify(fs.mkdir)
+
+export const readFile = promisify(fs.readFile)
+
+export const writeFile = promisify(fs.writeFile)
+
+export const getPixels = promisify(getPixels_)
+
+const exec = promisify(cp.exec)
+
+export async function getProjectConfig() {
+  if (!fs.existsSync(CONFIG_PATH)) return MINIMAL_CONFIG
+  const json = await readFile(CONFIG_PATH)
+  try {
+    const cfg = JSON.parse(`${json}`)
+    return {
+      ...MINIMAL_CONFIG,
+      ...cfg,
+    } as ProjectConfig
+  } catch (err) {
+    console.error('It looks like p8.json contains invalid JSON. Please fix it.')
+    process.exit(1)
+  }
+}
+
+export async function updateProjectConfig(next: Partial<ProjectConfig>) {
+  const prev = await getProjectConfig()
+  const out = Object.assign({}, prev, {
+    name: next.name ?? prev.name,
+    version: next.version ?? prev.version,
+    author: next.author ?? prev.author,
+    main: next.main ?? prev.main,
+    dependencies: next.dependencies
+      ? { ...prev.dependencies, ...next.dependencies }
+      : prev.dependencies,
+    gfxDependencies: next.gfxDependencies
+      ? { ...prev.gfxDependencies, ...next.gfxDependencies }
+      : prev.gfxDependencies,
+  })
+  const txt = JSON.stringify(out, null, 2)
+  await writeFile(CONFIG_PATH, txt)
+}
+
+export function getProjectDirname() {
+  return basename(process.cwd())
+}
+
+export async function whoami() {
+  try {
+    return (await exec('whoami')).stdout.trim()
+  } catch (err) {
+    return ''
+  }
+}
+
+// const compileMoonScript = (exports.compileMoonScript = input =>
+//   require('child_process').execSync(`moonc --`, { input }))
+
+enum Extension {
+  None = '',
+  Lua = 'lua',
+  MoonScript = 'moon',
+  PNG = 'png',
+  JPG = 'jpg',
+  JPEG = 'jpeg',
+  GIF = 'gif',
+}
+
+export enum DepType {
+  Script = 'dependencies',
+  Sprite = 'gfxDependencies',
+  Unknown = '???',
+}
+
+export interface Dependency {
+  type: DepType
+  ext: string
+  name: string
+  src: string
+}
+
+function getDepType(ext: string) {
+  switch (ext) {
+    case Extension.Lua:
+    case Extension.MoonScript: {
+      return DepType.Script
+    }
+    case Extension.PNG:
+    case Extension.GIF:
+    case Extension.JPG:
+    case Extension.JPEG: {
+      return DepType.Sprite
+    }
+    case Extension.None:
+    default:
+      return DepType.Unknown
+  }
+}
+
+export async function installDependency(src: string): Promise<Dependency> {
+  if (!exists(DEPS_PATH)) await mkdir(DEPS_PATH)
+  const { name, ext } = parse(src)
+  const type = getDepType(ext.substr(1))
+  // Get remote dependency and save to pico_modules
+  if (src.startsWith('http')) {
+    const res = await fetch(src)
+    switch (type) {
+      case DepType.Script:
+      case DepType.Sprite: {
+        await writeFile(`${DEPS_PATH}/${name}${ext}`, await res.buffer())
+        return { type, name, src, ext }
+      }
+      case DepType.Unknown: {
+        // Attempt to infer image type
+        const contentType = res.headers.get('content-type')
+        let [_, imageType = ''] = contentType?.split('/') ?? []
+        imageType = imageType.substr(1)
+        switch (imageType) {
+          case Extension.PNG:
+          case Extension.GIF:
+          case Extension.JPG:
+          case Extension.JPEG: {
+            const ext = imageType
+            const type = DepType.Sprite
+            await writeFile(`${DEPS_PATH}/${name}${ext}`, await res.buffer())
+            return { type, name, src, ext }
+          }
+          // Otherwise, bail
+          default:
+            console.error('Unknown dependency type', src)
+            process.exit(1)
+        }
+      }
+    }
+  } else if (!exists(src)) {
+    console.error('Could not find local dependency', src)
+    process.exit(1)
+  }
+  return { type, name, src, ext }
+}
+
+export const PALETTE = {
+  // dark blue
+  '29,43,83': '1',
+  // dark purple
+  '126,37,83': '2',
+  // dark green
+  '0,135,81': '3',
+  // brown
+  '171,82,54': '4',
+  // dark gray
+  '95,87,79': '5',
+  // light gray
+  '194,195,199': '6',
+  // white
+  '255,241,232': '7',
+  // red
+  '255,0,77': '8',
+  // orange
+  '255,163,0': '9',
+  // yellow
+  '255,236,39': 'a',
+  // green
+  '0,228,54': 'b',
+  // blue
+  '41,173,255': 'c',
+  // indigo
+  '131,118,156': 'd',
+  // pink
+  '255,119,168': 'e',
+  // peach
+  '255,204,170': 'f',
+}
+
+export const EMPTY_CART = `pico-8 cartridge // http://www.pico-8.com
 version 8
 __lua__
 
