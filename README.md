@@ -1,6 +1,6 @@
 # p8
 
-[![Build Status](https://api.travis-ci.org/jozanza/p8.svg?branch=master)](https://travis-ci.org/jozanza/p8)
+<!-- [![Build Status](https://api.travis-ci.org/jozanza/p8.svg?branch=master)](https://travis-ci.org/jozanza/p8) -->
 [![NPM Version](https://img.shields.io/npm/v/p8.svg?style=flat)](https://www.npmjs.org/package/p8)
 [![NPM Downloads](https://img.shields.io/npm/dm/p8.svg?style=flat)](https://www.npmjs.org/package/p8)
 
