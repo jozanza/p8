@@ -17,7 +17,6 @@
     "start": "tsc -w",
     "prestart": "rm -rf lib",
     "test": "pkg -o p8 package.json && ./p8",
-    "prepublish": "npm run build",
     "build": "npm run build-linux && npm run build-macos && npm run build-win",
     "prebuild": "tsc && rm -rf target && mkdir -p target/{linux,macos,win}",
     "build-linux": "pkg -o target/linux/p8 -t linux package.json",
