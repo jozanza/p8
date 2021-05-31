@@ -23,7 +23,7 @@ Import lua/moonscript modules, spritesheets, and automatically reload your carts
 
 ### Download the executable
 
-You can grab the executable for your platform from [**releases page** &rarr;](./releases)
+You can grab the executable for your platform from [**releases page** &rarr;](https://github.com/jozanza/p8/releases)
 
 <sup>- On macOS or linux, you may want to copy the executable into `/usr/bin`.</sup><br />
 <sup>- On windows, you may want to add the executable to your PATH.</sup>
