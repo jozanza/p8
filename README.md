@@ -8,6 +8,15 @@
 
 Import lua/moonscript modules, spritesheets, and automatically reload your carts as you code.
 
+## Features:
+
+- Share **code** and **sprites** (via github or any file host)
+- Use **`require()`** to use modules in your own carts
+- Code in **any IDE** you want
+- **Auto-reload** carts on save
+
+___
+
 ## Installation
 
 ### Download the executable
@@ -24,6 +33,8 @@ npm i -g p8
 ```
 
 > **NOTE:** If you want support for moonscript, be sure to install [moonc](http://moonscript.org/#installation)
+
+___
 
 ## Getting Started
 
