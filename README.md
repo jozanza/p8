@@ -15,7 +15,7 @@ Import lua/moonscript modules, spritesheets, and automatically reload your carts
 - Code in **any IDE** you want
 - **Auto-reload** carts on save
 
-___
+<br />
 
 ## Installation
 
@@ -32,9 +32,7 @@ Or you can use good old npm
 npm i -g p8
 ```
 
-> **NOTE:** If you want support for moonscript, be sure to install [moonc](http://moonscript.org/#installation)
-
-___
+<br />
 
 ## Getting Started
 
