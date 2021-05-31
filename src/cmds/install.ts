@@ -23,5 +23,5 @@ export async function handler(_args: Args) {
     console.log('Installing', name, '...')
     await installDependency(src)
   }
-  console.log('Done! ✨')
+  console.log('Installation complete! ✨')
 }

@@ -10,14 +10,16 @@ Import lua/moonscript modules, spritesheets, and automatically reload your carts
 
 ## Installation
 
-### [&laquo; Download the exectuables &raquo;](https://github.com/jozanza/p8/releases)
+### Download the executable
+You can grab the executable for your platform from [**releases page** &raquo;](./releases)
 
 <sup>- On macOS or linux, you may want to copy the executable into `/usr/bin`.</sup><br />
 <sup>- On windows, you may want to add the executable to your PATH.</sup>
 
-Or use `npm`
+### NPM
+Or you can use good old npm
 
-```bash
+```sh
 npm i -g p8
 ```
 
@@ -25,9 +27,9 @@ npm i -g p8
 
 ## Getting Started
 
-You can be up-and-running in 4 steps. Here's a summary:
+You can be up-and-running in a few quick steps:
 
-#### 1. Initialize
+### 1. Initialize your project
 
 Create and/or adds basic fields to p8.json.
 
@@ -35,27 +37,19 @@ Create and/or adds basic fields to p8.json.
 p8 init
 ```
 
-#### 2. Add Dependencies
+### 2. Add Dependencies
 
 Add .lua, .moon, .png, .jpg, or .gif files.
 
-```
+```sh
 p8 add [file|url...]
 ```
 
-#### 3. Install
+### 3. Run your cartridge
 
-Stores dependencies in a pico_modules folder.
+Use the `--watch` flag to automatically reload whenever the entry-point is saved. This command will automatically install and build if you haven't already.
 
-```
-p8 install
-```
-
-#### 4. Run
-
-Builds + runs your cart. Use the `--watch` flag to automatically reload whenever the entry-point is saved
-
-```
+```sh
 p8 run
 ```
 
@@ -63,5 +57,5 @@ p8 run
 
 If you want a detailed walkthrough, check out the following resources:
 
-- [Read Getting Started with p8 &raquo;](https://github.com/jozanza/p8/blob/master/getting-started.md)
-- [Checkout the p8 Example Project &raquo;](https://github.com/jozanza/p8_example)
+- [Read Getting Started with p8 &raquo;](./getting-started.md)
+- [Checkout the examples &raquo;](./examples)

@@ -55,7 +55,7 @@ export async function handler({ print, out }: Args) {
   } else {
     await writeFile(`${out ?? config.name}.p8`, cart)
   }
-  console.log('Done! ✨')
+  console.log(`Built ${`${out ?? config.name}.p8`} ✨`)
 }
 
 const replaceLua = (a: string, b: string) =>

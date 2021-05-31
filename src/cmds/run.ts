@@ -2,7 +2,8 @@ import { CommandBuilder, Arguments } from 'yargs'
 import fs from 'fs'
 import path from 'path'
 import { spawn, execSync } from 'child_process'
-import { getProjectConfig, readFile } from '../common'
+import { exists, getProjectConfig, readFile } from '../common'
+import { handler as install } from './install'
 import { handler as build } from './build'
 
 export const command = 'run'
@@ -34,9 +35,25 @@ type Args = Arguments<{
 
 export async function handler({ watch, cart, _: [_, ...switches] }: Args) {
   const config = await getProjectConfig()
-
-  // -export "-i 32 -s 2 -c 12 foo.bin"
+  let didInstall = false
+  if (!exists('./pico_modules')) {
+    await install({
+      $0: 'p8',
+      _: ['install'],
+    })
+    didInstall = true
+  }
   const filename = `${cart ?? config.name}.p8`
+  if (didInstall || !exists(filename)) {
+    await build({
+      print: false,
+      out: cart ?? config.name,
+      $0: 'p8',
+      _: ['build'],
+    })
+  }
+
+  console.log(`Running ${filename}`)
   const pico8 = spawn(`/Applications/PICO-8.app/Contents/MacOS/pico8`, [
     '-run',
     ...switches,
@@ -78,7 +95,12 @@ tell application "System Events" to keystroke tab using command down
       console.clear()
       console.log(`...building ${filename}`)
       console.clear()
-      await build({} as any)
+      await build({
+        print: false,
+        out: cart ?? config.name,
+        $0: 'p8',
+        _: ['build'],
+      })
       console.log('reloading...')
       runApplescript(reloadCart)
       console.clear()
