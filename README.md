@@ -20,12 +20,14 @@ Import lua/moonscript modules, spritesheets, and automatically reload your carts
 ## Installation
 
 ### Download the executable
-You can grab the executable for your platform from [**releases page** &raquo;](./releases)
+
+You can grab the executable for your platform from [**releases page** &rarr;](./releases)
 
 <sup>- On macOS or linux, you may want to copy the executable into `/usr/bin`.</sup><br />
 <sup>- On windows, you may want to add the executable to your PATH.</sup>
 
 ### NPM
+
 Or you can use good old npm
 
 ```sh
@@ -36,7 +38,7 @@ npm i -g p8
 
 ## Getting Started
 
-You can be up-and-running in a few quick steps:
+You can be up-and-running in a few quick steps.
 
 ### 1. Initialize your project
 
@@ -50,7 +52,7 @@ p8 init
 
 Add .lua, .moon, .png, .jpg, or .gif files.
 
-```sh
+```
 p8 add [file|url...]
 ```
 
@@ -58,13 +60,26 @@ p8 add [file|url...]
 
 Use the `--watch` flag to automatically reload whenever the entry-point is saved. This command will automatically install and build if you haven't already.
 
-```sh
+```
 p8 run
 ```
 
-> **NOTE:** Run `p8 help` for more detailed information on usage for these commands.
+## Usage
 
-If you want a detailed walkthrough, check out the following resources:
+```
+Usage: p8 <command> [options]
 
-- [Read Getting Started with p8 &raquo;](./getting-started.md)
-- [Checkout the examples &raquo;](./examples)
+Commands:
+  p8 add [file|url...]  add modules as "dependencies" or "gfxDependencies" in p8.json.
+  p8 build              outputs a cart (.p8 file)
+  p8 init               initialize the project
+  p8 install            install dependencies listed in p8.json to ./pico_modules
+  p8 run                runs a .p8 cartridge (PICO-8 switches can be passed after a trailing --)
+Options:
+  --version  Show version number
+  --help     Show help
+```
+
+> **If you want a detailed walkthrough, read [Getting Started with p8 &rarr;](./getting-started.md).<br />**
+
+> **If you want more examples, [check out the examples &rarr;](./examples)**
