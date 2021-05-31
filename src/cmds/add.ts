@@ -35,7 +35,7 @@ export async function handler({ file: deps = [] }: Args) {
           break
         }
         case DepType.Sprite: {
-          gfxDependencies[`${dep.name}.${dep.ext}`] = src
+          gfxDependencies[`${dep.name}${dep.ext}`] = src
           break
         }
         case DepType.Unknown: {

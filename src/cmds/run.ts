@@ -1,8 +1,14 @@
 import { CommandBuilder, Arguments } from 'yargs'
+import fs from 'fs'
+import path from 'path'
+import { spawn, execSync } from 'child_process'
+import { getProjectConfig, readFile } from '../common'
+import { handler as build } from './build'
 
 export const command = 'run'
 
-export const describe = 'runs a .p8 cartridge'
+export const describe =
+  'runs a .p8 cartridge (PICO-8 switches can be passed after a trailing --)'
 
 export const builder: CommandBuilder = {
   watch: {
@@ -14,19 +20,73 @@ export const builder: CommandBuilder = {
   cart: {
     alias: 'c',
     type: 'string',
-    describe: 'the name of the cart to run (uses name field in p8.json by default)',
+    describe:
+      'the name of the cart to run (uses name field in p8.json by default)',
   },
 }
 
 type Args = Arguments<{
-  watch: boolean
+  watch?: boolean
   cart?: string
   $0: 'p8'
-  _: ['run'] & string[]
+  _: string[]
 }>
 
-export async function handler(args: Args) {
-  // args._.slice(1) is a list of PICO-8 switches. can be pass with a trailing --
-  const [cmd, ...switches] = args._
-  console.log(cmd, args, switches)
+export async function handler({ watch, cart, _: [_, ...switches] }: Args) {
+  const config = await getProjectConfig()
+
+  // -export "-i 32 -s 2 -c 12 foo.bin"
+  const filename = `${cart ?? config.name}.p8`
+  const pico8 = spawn(`/Applications/PICO-8.app/Contents/MacOS/pico8`, [
+    '-run',
+    ...switches,
+    filename,
+  ] as readonly string[])
+  pico8.stdout.on('data', (x: string) => console.log(x))
+  pico8.stderr.on('data', (x: string) => console.error(x))
+
+  if (!watch) {
+    process.exit(0)
+  }
+
+  const runApplescript = (script: string) =>
+    execSync(`osascript -e '${script}'`)
+  const reloadCart = `tell application "PICO-8" to activate
+tell application "System Events"
+  key code 53
+  "load ${path.resolve('./', filename)}"
+  key code 36
+  delay .3
+  key code 15 using control down
+end tell
+tell application "System Events" to keystroke tab using command down
+`
+  const idleMessage = 'waiting for changes...(Press ^C at any time to quit.)'
+
+  console.log(idleMessage)
+  let isBuilding = false
+  let prev = ''
+  fs.watch(config.main, async (e, x) => {
+    if (isBuilding) return
+    if (e !== 'change') return
+    try {
+      const next = (await readFile(config.main)).toString()
+      if (prev === next) return
+      prev = next
+      isBuilding = true
+      console.log(`${x} changed`)
+      console.clear()
+      console.log(`...building ${filename}`)
+      console.clear()
+      await build({} as any)
+      console.log('reloading...')
+      runApplescript(reloadCart)
+      console.clear()
+      console.log(idleMessage)
+    } catch (err) {
+      console.error(err)
+    } finally {
+      isBuilding = false
+    }
+  })
 }

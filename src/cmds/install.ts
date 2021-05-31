@@ -13,7 +13,7 @@ type Args = Arguments<{
   _: ['install'] & string[]
 }>
 
-export async function handler(args: Args) {
+export async function handler(_args: Args) {
   const { dependencies = {}, gfxDependencies = {} } = await getProjectConfig()
   for (const [name, src] of Object.entries(dependencies)) {
     console.log('Installing', name, '...')

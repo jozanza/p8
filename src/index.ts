@@ -5,13 +5,12 @@ enum Command {
   build = 'build',
   init = 'init',
   install = 'install',
-  remove = 'remove',
   run = 'run',
 }
 
-export default function main() {
+export default async function main() {
   // prettier-ignore
-  const { _:[command] } = yargs
+  const {_:[command]} = await yargs
     .scriptName('p8')
     .version(require('../package').version)
     .usage('Usage: p8 <command> [options]')
@@ -30,8 +29,9 @@ export default function main() {
     case Command.add:
     case Command.build:
     case Command.init:
-    case Command.install:
-    case Command.remove:
+    case Command.install: {
+      process.exit(0)
+    }
     case Command.run: break
   }
 }

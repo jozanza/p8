@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "👾 PICO-8 dependency manager",
   "main": "lib/index.js",
+  "module": "src/index.ts",
   "bin": {
     "p8": "bin/p8"
   },
@@ -24,15 +25,18 @@
     "build-win": "pkg -o target/win/p8 -t win package.json"
   },
   "devDependencies": {
-    "@types/node": "^13.7.1",
+    "@types/get-pixels": "^3.3.1",
+    "@types/node": "^13.13.52",
     "@types/node-fetch": "^2.5.4",
-    "@types/yargs": "^15.0.3",
-    "pkg": "^4.4.3",
+    "@types/yargs": "^17.0.0",
+    "pkg": "^5.2.1",
     "typescript": "^3.7.5"
   },
   "dependencies": {
+    "get-pixels": "^3.3.2",
+    "moonc": "^1.1.5",
     "node-fetch": "^2.6.0",
-    "yargs": "^15.1.0"
+    "yargs": "^17.0.1"
   },
   "author": "Josiah Savary <hello@jsavary.com> (http://jsavary.com)",
   "license": "MIT",
