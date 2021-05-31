@@ -8,6 +8,8 @@
 
 Import lua/moonscript modules, spritesheets, and automatically reload your carts as you code.
 
+<br />
+
 ## Features:
 
 - Share **code** and **sprites** (via github or any file host)
@@ -63,6 +65,8 @@ Use the `--watch` flag to automatically reload whenever the entry-point is saved
 ```
 p8 run
 ```
+
+<br />
 
 ## Usage
 
